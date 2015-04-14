@@ -10,7 +10,21 @@ app:
     - db:db
   ports:
     - 5000:5000
+  environment:
+    HUBOT_LCB_TOKEN: NTUyZDc3YWNmYjdlMTgxMjAwMWQzMDJlOjhjZGY3MzE2NzMzMmFmZDY0Yzk4YjdmMjgwMmQzNjgwNGIwMjhlZDcwNDMzODdlYQ==
+    HUBOT_LCB_ROOMS: 552d77dbfb7e1812001d302f
+  command:
+    - /bin/bash
+    - start.sh
 
 # Mongo Database
 db:
   image: mongo:latest
+  volumes_from:
+    - data
+
+data:
+  image: ubuntu
+  command: true
+  volumes:
+    - /data/db
