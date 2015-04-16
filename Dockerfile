@@ -9,12 +9,18 @@ RUN npm install -g \
   coffee-script \
   generator-hubot \
   hubot \
-  hubot-lets-chat \
   yo
 
 # yo does not fully support Docker and root yet:
 # https://github.com/yeoman/yo/issues/101
 RUN adduser --disabled-password --gecos "" yeoman
+RUN chown -R yeoman /usr
 USER yeoman
-RUN yo hubot
+WORKDIR /usr/src
+RUN mkdir /usr/src/hubot
+WORKDIR /usr/src/hubot
+RUN yo hubot --defaults
 USER root
+RUN npm install --save hubot-lets-chat
+RUN npm install -g
+WORKDIR /usr/src/app

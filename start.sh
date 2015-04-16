@@ -1,4 +1,4 @@
 echo "starting services"
-hubot --adapter lets-chat &
-npm start
+cd ../hubot && bin/hubot --adapter lets-chat &
+cd ../app && npm start
 echo "all services started"
